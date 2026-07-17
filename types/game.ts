@@ -12,4 +12,6 @@ export interface RoundResult {
   guess: 'less' | 'more';
   actualCalories: number;
   guessedCalories: number;
+  combo: number;
+  xp: number;
 }

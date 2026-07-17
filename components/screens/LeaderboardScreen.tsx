@@ -16,13 +16,13 @@ const rest = leaderboard.slice(3);
 const podium = [top3[1], top3[0], top3[2]];
 const podiumStyles = [
   { height: 'h-24', ring: 'ring-gray-400', crown: 'text-gray-300', order: 2 },
-  { height: 'h-32', ring: 'ring-[#a3ff12]', crown: 'text-yellow-400', order: 1 },
+  { height: 'h-32', ring: 'ring-[#bffd08]', crown: 'text-yellow-400', order: 1 },
   { height: 'h-20', ring: 'ring-orange-600', crown: 'text-orange-500', order: 3 },
 ];
 
 export default function LeaderboardScreen({ onBack, onInvite }: LeaderboardScreenProps) {
   return (
-    <div className="min-h-screen px-6 pb-32 pt-14">
+    <div className="no-scrollbar h-full overflow-y-auto px-6 pb-32 pt-[calc(env(safe-area-inset-top)+1rem)]">
       {/* Header */}
       <div className="mb-6 flex items-center gap-4">
         <button

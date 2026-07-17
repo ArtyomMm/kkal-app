@@ -27,7 +27,7 @@ export default function BottomNav({ current, onNavigate }: BottomNavProps) {
               onClick={() => onNavigate(screen)}
               className={`flex flex-col items-center gap-0.5 rounded-full px-5 py-2 transition-all ${
                 active
-                  ? 'bg-[#a3ff12] text-black'
+                  ? 'bg-[#bffd08] text-black shadow-[0_0_18px_rgba(191,253,8,0.45)]'
                   : 'text-gray-500 hover:text-gray-300'
               }`}
             >

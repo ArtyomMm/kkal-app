@@ -3,7 +3,7 @@
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
-  --neon-green: #a3ff12;
+  --neon-green: #bffd08;
   --neon-orange: #ff5722;
   --card-bg: #1a1a1a;
   --card-border: #2a2a2a;
@@ -16,17 +16,21 @@
   --color-neon-orange: var(--neon-orange);
   --color-card-bg: var(--card-bg);
   --color-card-border: var(--card-border);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+}
+
+html,
+body {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
 }
 
 body {
   background: radial-gradient(ellipse 80% 60% at 50% 40%, #1a1a1a 0%, #0a0a0a 70%);
   background-attachment: fixed;
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
-  min-height: 100vh;
+  font-family: var(--font-sans), Inter, system-ui, -apple-system, sans-serif;
 }
 
 /* Hide scrollbars for a cleaner mobile feel */

@@ -13,11 +13,11 @@ export default function ProfileScreen() {
   const maxActivity = Math.max(...weeklyActivity.map((d) => d.value));
 
   return (
-    <div className="min-h-screen px-6 pb-32 pt-14">
+    <div className="no-scrollbar h-full overflow-y-auto px-6 pb-32 pt-[calc(env(safe-area-inset-top)+1rem)]">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="rounded-full p-[3px] shadow-[0_0_20px_rgba(163,255,18,0.5)] [background:linear-gradient(135deg,#a3ff12,#4d7a00)]">
+          <div className="rounded-full p-[3px] shadow-[0_0_20px_rgba(191,253,8,0.5)] [background:linear-gradient(135deg,#bffd08,#4d7a00)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={currentUser.avatar}
@@ -49,7 +49,7 @@ export default function ProfileScreen() {
             initial={{ width: 0 }}
             animate={{ width: `${currentUser.levelProgress * 100}%` }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="h-full rounded-full bg-[#a3ff12] shadow-[0_0_12px_rgba(163,255,18,0.6)]"
+            className="h-full rounded-full bg-[#bffd08] shadow-[0_0_12px_rgba(191,253,8,0.6)]"
           />
         </div>
       </div>
@@ -58,7 +58,7 @@ export default function ProfileScreen() {
       <div className="mt-4 rounded-3xl border border-[#2a2a2a] bg-[#1a1a1a] p-5">
         <div className="mb-4 flex items-center justify-between">
           <span className="font-bold text-white">Activity</span>
-          <span className="rounded-full bg-[#2a2a2a] px-3 py-1 text-xs font-semibold text-[#a3ff12]">
+          <span className="rounded-full bg-[#2a2a2a] px-3 py-1 text-xs font-semibold text-[#bffd08]">
             [ 420 ] kcal
           </span>
         </div>
@@ -69,7 +69,7 @@ export default function ProfileScreen() {
                 initial={{ height: 0 }}
                 animate={{ height: `${(d.value / maxActivity) * 100}%` }}
                 transition={{ duration: 0.6, delay: i * 0.05, ease: 'easeOut' }}
-                className="w-full rounded-full bg-gradient-to-t from-[#4d7a00] to-[#a3ff12]"
+                className="w-full rounded-full bg-gradient-to-t from-[#4d7a00] to-[#bffd08]"
               />
               <span className="text-[10px] font-medium text-gray-500">{d.day}</span>
             </div>

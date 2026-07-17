@@ -14,7 +14,7 @@ export default function Game() {
   const [screen, setScreen] = useState<Screen>('welcome');
 
   return (
-    <div className="relative mx-auto min-h-screen w-full max-w-md">
+    <div className="relative mx-auto h-screen w-full max-w-md overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={screen}
@@ -22,6 +22,7 @@ export default function Game() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.25 }}
+          className="h-full"
         >
           {screen === 'welcome' && (
             <WelcomeScreen onStart={() => setScreen('game')} />
