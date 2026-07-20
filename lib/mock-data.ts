@@ -13,7 +13,7 @@ export const currentUser = {
   level: 15,
   levelProgress: 0.68,
   avatar: avatar('1500648767791-00dcc994a43e'),
-  highscore: 2850,
+  highscore: 0,
 };
 
 export const leaderboard: Player[] = [

@@ -7,24 +7,27 @@ interface WelcomeScreenProps {
   onStart: () => void;
 }
 
-const foods = [
+const heroFoods = [
   {
-    src: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=400&q=80',
-    className: 'top-2 left-2 h-32 w-32',
-    delay: 0,
-    duration: 4,
+    src: '/images/welcome/steak.png',
+    alt: 'Steak',
+    className: 'left-4 top-6 h-28 w-28',
+    duration: '3.2s',
+    delay: '0s',
   },
   {
-    src: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=300&q=80',
-    className: 'top-0 right-4 h-24 w-24',
-    delay: 0.6,
-    duration: 5,
+    src: '/images/welcome/beer.png',
+    alt: 'Beer',
+    className: 'right-3 top-2 h-24 w-24',
+    duration: '4s',
+    delay: '0.5s',
   },
   {
-    src: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=400&q=80',
-    className: 'bottom-2 left-1/2 -translate-x-1/2 h-28 w-28',
-    delay: 1.1,
-    duration: 4.5,
+    src: '/images/welcome/pizza.png',
+    alt: 'Pizza slice',
+    className: 'bottom-5 left-1/2 h-32 w-32 -translate-x-1/2',
+    duration: '3.6s',
+    delay: '0.9s',
   },
 ];
 
@@ -39,30 +42,30 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
         Highscore: {currentUser.highscore.toLocaleString('en-US')}
       </h1>
 
-      {/* Floating food composition — glassmorphism stage */}
+      {/* Hero glass panel with floating PNG assets */}
       <div className="relative flex flex-1 items-center justify-center">
-        <div className="relative h-72 w-72">
-          {/* Neon ambient glow */}
-          <div className="absolute inset-6 rounded-full bg-[#bffd08]/20 blur-[70px]" />
+        <div className="relative h-80 w-80">
+          {/* Neon ambient glow behind the glass */}
+          <div className="absolute inset-8 rounded-full bg-[#bffd08]/20 blur-[70px]" />
 
-          {/* Frosted glass stage */}
-          <div className="absolute inset-0 rounded-[40px] border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl" />
+          {/* Frosted glass panel */}
+          <div className="absolute inset-0 rounded-[40px] border border-white/10 bg-black/30 shadow-2xl backdrop-blur-md" />
 
-          {foods.map((food, i) => (
-            <motion.div
-              key={i}
-              className={`absolute overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl backdrop-blur-sm ${food.className}`}
-              animate={{ y: [0, -16, 0], rotate: [-3, 3, -3] }}
-              transition={{
-                duration: food.duration,
-                delay: food.delay,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
+          {/* Floating food items */}
+          {heroFoods.map((food) => (
+            <div
+              key={food.src}
+              className={`animate-float absolute ${food.className}`}
+              style={{ animationDuration: food.duration, animationDelay: food.delay }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={food.src} alt="" className="h-full w-full object-cover" />
-            </motion.div>
+              <img
+                src={food.src}
+                alt={food.alt}
+                draggable={false}
+                className="h-full w-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -71,9 +74,9 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
       <motion.button
         whileTap={{ scale: 0.96 }}
         onClick={onStart}
-        className="w-full rounded-full bg-[#bffd08] px-8 py-6 text-2xl font-black text-black shadow-[0_0_40px_rgba(191,253,8,0.45)] transition-colors hover:bg-[#cdff3a]"
+        className="w-full rounded-full bg-[#bffd08] px-8 py-6 text-2xl font-black text-[#111111] shadow-[0_0_40px_rgba(191,253,8,0.45)] transition-colors hover:bg-[#cdff3a]"
       >
-        Start Game
+        Старт
       </motion.button>
     </div>
   );
