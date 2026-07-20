@@ -19,6 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <head>
+        <link rel="preload" as="image" href="/images/welcome/steak.png" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/welcome/beer.png" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/welcome/pizza.png" fetchPriority="high" />
+      </head>
       <body className="h-screen overflow-hidden font-sans">{children}</body>
     </html>
   );

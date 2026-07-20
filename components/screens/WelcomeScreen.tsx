@@ -11,23 +11,29 @@ const heroFoods = [
   {
     src: '/images/welcome/steak.png',
     alt: 'Steak',
-    className: 'left-4 top-6 h-28 w-28',
-    duration: '3.2s',
+    width: 140,
+    height: 140,
+    className: 'left-0 bottom-4 z-10',
+    duration: '3s',
     delay: '0s',
   },
   {
     src: '/images/welcome/beer.png',
     alt: 'Beer',
-    className: 'right-3 top-2 h-24 w-24',
-    duration: '4s',
-    delay: '0.5s',
+    width: 130,
+    height: 130,
+    className: 'right-0 bottom-4 z-10',
+    duration: '3.8s',
+    delay: '0.4s',
   },
   {
     src: '/images/welcome/pizza.png',
     alt: 'Pizza slice',
-    className: 'bottom-5 left-1/2 h-32 w-32 -translate-x-1/2',
-    duration: '3.6s',
-    delay: '0.9s',
+    width: 140,
+    height: 140,
+    className: 'left-1/2 -translate-x-1/2 bottom-10 z-20',
+    duration: '3.4s',
+    delay: '0.8s',
   },
 ];
 
@@ -44,14 +50,18 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
 
       {/* Hero glass panel with floating PNG assets */}
       <div className="relative flex flex-1 items-center justify-center">
-        <div className="relative h-80 w-80">
-          {/* Neon ambient glow behind the glass */}
-          <div className="absolute inset-8 rounded-full bg-[#bffd08]/20 blur-[70px]" />
+        {/* Soft ambient neon lime backlight */}
+        <div
+          className="pointer-events-none absolute inset-0 flex items-center justify-center"
+          style={{
+            background:
+              'radial-gradient(circle at 50% 50%, rgba(191,253,8,0.18) 0%, transparent 60%)',
+          }}
+        />
 
-          {/* Frosted glass panel */}
-          <div className="absolute inset-0 rounded-[40px] border border-white/10 bg-black/30 shadow-2xl backdrop-blur-md" />
-
-          {/* Floating food items */}
+        {/* Glassmorphic panel */}
+        <div className="relative flex h-72 w-80 items-end justify-center overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-xl">
+          {/* Floating food items — overlapping 3D composition */}
           {heroFoods.map((food) => (
             <div
               key={food.src}
@@ -62,8 +72,14 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
               <img
                 src={food.src}
                 alt={food.alt}
+                width={food.width}
+                height={food.height}
+                loading="eager"
+                // @ts-expect-error fetchPriority is valid HTML but not in React types yet
+                fetchpriority="high"
                 draggable={false}
-                className="h-full w-full object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
+                className="object-contain drop-shadow-[0_12px_30px_rgba(0,0,0,0.6)]"
+                style={{ width: food.width, height: food.height }}
               />
             </div>
           ))}
