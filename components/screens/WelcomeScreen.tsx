@@ -11,27 +11,27 @@ const heroFoods = [
   {
     src: '/images/welcome/steak.png',
     alt: 'Steak',
-    width: 140,
-    height: 140,
-    className: 'left-0 bottom-4 z-10',
+    width: 135,
+    height: 135,
+    className: 'left-[6%] bottom-10 z-20',
     duration: '3s',
     delay: '0s',
   },
   {
     src: '/images/welcome/beer.png',
     alt: 'Beer',
-    width: 130,
-    height: 130,
-    className: 'right-0 bottom-4 z-10',
+    width: 170,
+    height: 170,
+    className: 'left-1/2 -translate-x-1/2 bottom-0 z-30',
     duration: '3.8s',
     delay: '0.4s',
   },
   {
     src: '/images/welcome/pizza.png',
     alt: 'Pizza slice',
-    width: 140,
-    height: 140,
-    className: 'left-1/2 -translate-x-1/2 bottom-10 z-20',
+    width: 105,
+    height: 105,
+    className: 'right-[8%] bottom-16 z-10',
     duration: '3.4s',
     delay: '0.8s',
   },
@@ -48,7 +48,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
         Highscore: {currentUser.highscore.toLocaleString('en-US')}
       </h1>
 
-      {/* Hero glass panel with floating PNG assets */}
+      {/* Hero composition with floating PNG assets */}
       <div className="relative flex flex-1 items-center justify-center">
         {/* Soft ambient neon lime backlight */}
         <div
@@ -59,13 +59,11 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           }}
         />
 
-        {/* Glassmorphic panel */}
-        <div className="relative flex h-72 w-80 items-end justify-center overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-xl">
-          {/* Floating food items — overlapping 3D composition */}
-          {heroFoods.map((food) => (
+        {/* Floating food items — overlapping 3D composition */}
+        {heroFoods.map((food) => (
+          <div key={food.src} className={`absolute ${food.className}`}>
             <div
-              key={food.src}
-              className={`animate-float absolute ${food.className}`}
+              className="animate-float"
               style={{ animationDuration: food.duration, animationDelay: food.delay }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -82,8 +80,8 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
                 style={{ width: food.width, height: food.height }}
               />
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
       {/* Start button */}
