@@ -14,4 +14,5 @@ export interface RoundResult {
   guessedCalories: number;
   combo: number;
   xp: number;
+  fact: string;
 }

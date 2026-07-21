@@ -1,87 +1,166 @@
 export interface FoodCard {
-  id: string;
+  id: number;
   name: string;
   image: string;
+  portion: string;
   calories: number;
   guessCalories: number;
-  portion: string;
-  category: 'breakfast' | 'lunch' | 'dinner' | 'snack' | 'dessert';
+  protein: number;
+  fat: number;
+  carbs: number;
+  factSuccess: string;
+  factFail: string;
 }
-
-const img = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&q=80`;
 
 export const gameCards: FoodCard[] = [
   {
-    id: 'ramen',
-    name: 'Spicy Ramen',
-    image: img('1569718212165-3a8278d5f624'),
-    calories: 400,
-    guessCalories: 420,
-    portion: '400g',
-    category: 'lunch',
+    id: 1,
+    name: 'Бургер Классический с соусом BBQ',
+    portion: '350г',
+    image: '/images/meals/classic-burger.webp',
+    calories: 760,
+    guessCalories: 620,
+    protein: 38,
+    fat: 41,
+    carbs: 59,
+    factSuccess:
+      'Браво! Ты насквозь видишь эту жирную котлету, сыр и соус. Тут в среднем ~760 ккал — цифра ориентировочная, но твой глазомер точен!',
+    factFail:
+      'Упс! Ты недооценил жирность говяжьей котлеты и углеводность BBQ-соуса. Вместе с булочкой они выдают около 760 ккал!',
   },
   {
-    id: 'burger',
-    name: 'Double Cheeseburger',
-    image: img('1568901346375-23c9450c58cd'),
-    calories: 535,
-    guessCalories: 480,
-    portion: '250g',
-    category: 'lunch',
+    id: 2,
+    name: 'Ярко-красная баночка легендарной газировки',
+    portion: '330мл',
+    image: '/images/meals/red-soda-can.webp',
+    calories: 140,
+    guessCalories: 90,
+    protein: 0,
+    fat: 0,
+    carbs: 35,
+    factSuccess:
+      'В точку! В этой баночке ~140 ккал и около 7 чайных ложек чистого сахара. Нулевая сытость, зато море дофамина!',
+    factFail:
+      'Мимо! Кажется, жидкие калории коварно обвели тебя вокруг пальца. В этой классической баночке ~140 ккал и около 7 чайных ложек сахара!',
   },
   {
-    id: 'salad',
-    name: 'Green Caesar Salad',
-    image: img('1546793665-c74683f339c1'),
-    calories: 180,
-    guessCalories: 260,
-    portion: '300g',
-    category: 'lunch',
-  },
-  {
-    id: 'pizza',
-    name: 'Pepperoni Pizza',
-    image: img('1513104890138-7c749659a591'),
-    calories: 285,
+    id: 3,
+    name: 'Бокал светлого фильтрованного пенного',
+    portion: '500мл',
+    image: '/images/meals/beer-glass.webp',
+    calories: 215,
     guessCalories: 300,
-    portion: '1 slice',
-    category: 'dinner',
+    protein: 2,
+    fat: 0,
+    carbs: 18,
+    factSuccess:
+      "Именно! Около 215 ккал. Так называемые 'пустые калории' одобряют твой глазомер. Закуски к нему лучше вообще не считать.",
+    factFail:
+      "Ошибочка! В таком бокале в среднем ~215 ккал. Пиво притворяется 'просто водичкой', но углеводы там наглые и коварные.",
   },
   {
-    id: 'cake',
-    name: 'Chocolate Lava Cake',
-    image: img('1606313564200-e75d5e30476c'),
-    calories: 450,
-    guessCalories: 390,
-    portion: '150g',
-    category: 'dessert',
+    id: 4,
+    name: 'Сочная шаурма с курицей в тонком лаваше',
+    portion: '350г',
+    image: '/images/meals/shawarma.webp',
+    calories: 720,
+    guessCalories: 850,
+    protein: 35,
+    fat: 29,
+    carbs: 75,
+    factSuccess:
+      'Гениально! Ты раскусил классику вертела. Курица невинна, но соус и лаваш догоняют этот свиток примерно до 720 ккал!',
+    factFail:
+      'Мимо! Куриное мясо кажется диетическим, но фирменный соус и большой лаваш превращают эту шаурму в среднем в ~720 ккал!',
   },
   {
-    id: 'sushi',
-    name: 'Salmon Sushi Set',
-    image: img('1579584425555-c3ce17fd4351'),
-    calories: 350,
-    guessCalories: 320,
-    portion: '8 pcs',
-    category: 'dinner',
+    id: 5,
+    name: 'Куриная голень в хрустящей панировке (готовая)',
+    portion: '100г',
+    image: '/images/meals/fried-chicken-drumstick.webp',
+    calories: 240,
+    guessCalories: 175,
+    protein: 19,
+    fat: 14,
+    carbs: 9,
+    factSuccess:
+      'В яблочко! Фритюр делает свое дело: одна аппетитная ножка в готовом виде тянет примерно на 240 ккал.',
+    factFail:
+      'Увы, мимо! В готовом виде сама курица невинна, но масляная панировка из фритюра превратила её ориентировочно в 240 ккал!',
   },
   {
-    id: 'pancakes',
-    name: 'Berry Pancakes',
-    image: img('1567620905732-2d1ec7ab7445'),
-    calories: 520,
-    guessCalories: 450,
-    portion: '3 pcs',
-    category: 'breakfast',
+    id: 6,
+    name: 'Премиальный стейк Рибай (приготовленный)',
+    portion: '250г',
+    image: '/images/meals/ribeye-steak.webp',
+    calories: 780,
+    guessCalories: 640,
+    protein: 58,
+    fat: 60,
+    carbs: 0,
+    factSuccess:
+      'В точку! Мраморные прослойки жира дают в готовом стейке ~780 ккал. Настоящий калорийный тяжеловес!',
+    factFail:
+      'Эх, промазал! Рибай — самый сочный кусок говядины. За счет благородного топленого жира в этой порции прячутся ориентировочные 780 ккал.',
   },
   {
-    id: 'poke',
-    name: 'Tuna Poke Bowl',
-    image: img('1546069901-ba9599a7e63c'),
+    id: 7,
+    name: 'Салат Цезарь с куриной грудкой и гренками',
+    portion: '250г',
+    image: '/images/meals/caesar-salad.webp',
+    calories: 420,
+    guessCalories: 300,
+    protein: 21,
+    fat: 26,
+    carbs: 25,
+    factSuccess:
+      'Блестяще! Ты раскусил обман. Листья салата дают хороший объем, но содержат почти 0 ккал, а вот соус, пармезан и гренки дают здесь ~420 ккал!',
+    factFail:
+      "Попался на иллюзию 'легкого салата'! Трава тут практически бескалорийна, а вот триада из жирного соуса, сухариков и сыра дает около 420 ккал!",
+  },
+  {
+    id: 8,
+    name: 'Праздничный Оливье с докторской колбасой и майонезом',
+    portion: '200г',
+    image: '/images/meals/olivier-salad.webp',
     calories: 380,
-    guessCalories: 410,
-    portion: '350g',
-    category: 'lunch',
+    guessCalories: 480,
+    protein: 8,
+    fat: 29,
+    carbs: 21,
+    factSuccess:
+      'Верно! Новогоднее настроение взвешено: около 380 ккал в скромной порции. Майонез коварно руководит этим праздником.',
+    factFail:
+      "Ошибочка! Кажется, ты недооценил щедрость повара, бахнувшего майонеза 'на глаз'. В этой тарелке скрывается ориентировочно 380 ккал!",
+  },
+  {
+    id: 9,
+    name: 'Выпечка-лодочка Хачапури по-аджарски',
+    portion: '330г',
+    image: '/images/meals/khachapuri.webp',
+    calories: 900,
+    guessCalories: 700,
+    protein: 38,
+    fat: 42,
+    carbs: 90,
+    factSuccess:
+      'Абсолютно! Озеро из сыра Сулугуни, желтка и сливочного масла в пышном тесте — это ядерные ~900 ккал!',
+    factFail:
+      'Ошибка! Думал, лодочка пощадит фигуру? Сырное море, масло и плотное тесто в комплексе дают мощные ~900 ккал!',
+  },
+  {
+    id: 10,
+    name: 'Сочная хинкалина со свининой и говядиной (1 шт)',
+    portion: '100г',
+    image: '/images/meals/khinkali.webp',
+    calories: 220,
+    guessCalories: 160,
+    protein: 10,
+    fat: 11,
+    carbs: 21,
+    factSuccess:
+      'Точно! Одна штучка — в районе 220 ккал. Но помни: хинкали ходят стаями, на одной порции еще никто не останавливался.',
+    factFail:
+      'Мимо! Коварство кроется в углеводном заварном тесте и жирном фарше. Вместе этот дуэт дает около 220 ккал на одну штуку!',
   },
 ];

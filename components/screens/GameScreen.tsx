@@ -17,11 +17,12 @@ import ResultOverlay from '@/components/ResultOverlay';
 const SWIPE_THRESHOLD = 110;
 
 export default function GameScreen() {
+  const TOTAL_LIVES = 3;
   const [state, setState] = useState<GameState>({
     currentCardIndex: 0,
-    score: 1400,
-    streak: 5,
-    lives: 5,
+    score: 0,
+    streak: 0,
+    lives: TOTAL_LIVES,
   });
   const [result, setResult] = useState<RoundResult | null>(null);
 
@@ -46,7 +47,7 @@ export default function GameScreen() {
     }
 
     const combo = correct ? state.streak + 1 : 0;
-    const xp = correct ? 100 * combo : 0;
+    const xp = correct ? 10 * combo : 0;
 
     setResult({
       correct,
@@ -55,6 +56,7 @@ export default function GameScreen() {
       guessedCalories: card.guessCalories,
       combo,
       xp,
+      fact: correct ? card.factSuccess : card.factFail,
     });
   };
 
@@ -89,10 +91,25 @@ export default function GameScreen() {
   return (
     <div className="flex h-full flex-col px-6 pb-28 pt-[calc(env(safe-area-inset-top)+1rem)]">
       {/* Top panel */}
-      <div className="flex items-center justify-between">
-        <span className="text-xl font-bold text-white">
-          Score: {state.score.toLocaleString('en-US')}
+      <div className="relative flex items-center justify-between">
+        <span className="text-xl font-black text-white">
+          {state.score.toLocaleString('en-US')} XP
         </span>
+
+        {/* Lives / tries indicator */}
+        <div className="absolute left-1/2 flex -translate-x-1/2 items-center gap-2">
+          {Array.from({ length: TOTAL_LIVES }).map((_, i) => (
+            <span
+              key={i}
+              className={`h-3 w-3 rounded-full transition-all ${
+                i < state.lives
+                  ? 'bg-[#bffd08] shadow-[0_0_10px_rgba(191,253,8,0.7)]'
+                  : 'bg-[#3a3a3a] opacity-25'
+              }`}
+            />
+          ))}
+        </div>
+
         {state.streak > 0 && (
           <span className="rounded-full bg-[#bffd08]/15 px-3 py-1 text-sm font-bold text-[#bffd08]">
             Combo x{state.streak}
@@ -100,8 +117,8 @@ export default function GameScreen() {
         )}
       </div>
 
-      {/* Single isolated card */}
-      <div className="flex flex-1 items-center justify-center">
+      {/* Single isolated card — lowered slightly for balanced breathing room */}
+      <div className="flex flex-1 items-center justify-center pt-6">
         <motion.div
           key={card.id + state.currentCardIndex}
           style={{ x, rotate }}
@@ -127,22 +144,32 @@ export default function GameScreen() {
             More
           </motion.div>
 
-          <div className="relative aspect-square w-full overflow-hidden rounded-3xl">
+          <div
+            className="relative aspect-square w-full overflow-hidden rounded-3xl"
+            style={{
+              background:
+                'radial-gradient(circle at 50% 45%, rgba(191,253,8,0.12) 0%, #111111 65%)',
+            }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={card.image}
               alt={card.name}
               draggable={false}
-              className="h-full w-full object-cover"
+              loading="eager"
+              className="h-full w-full object-contain p-2 drop-shadow-[0_12px_30px_rgba(0,0,0,0.55)]"
             />
           </div>
 
-          <div className="px-2 pb-2 pt-5 text-center">
-            <h2 className="text-2xl font-bold text-white">
-              {card.name} {card.portion}
+          <div className="px-2 pb-1 pt-4 text-center">
+            <h2 className="text-base font-bold leading-snug text-white">
+              {card.name}
             </h2>
+            <p className="mt-0.5 text-sm font-medium text-gray-400">
+              {card.portion}
+            </p>
             <p className="mt-2 text-3xl font-black text-[#bffd08]">
-              {card.guessCalories} kcal?
+              {card.guessCalories} ккал?
             </p>
           </div>
         </motion.div>
